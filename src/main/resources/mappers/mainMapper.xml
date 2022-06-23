@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.test.dao.MainDao">
+	<!-- 회원가입 처리 -->
+	<insert id="signInAction" parameterType="com.spring.test.dto.MemberDto">
+		INSERT INTO member_tbl(mem_id, mem_pwd)
+		VALUES(#{mem_id},#{mem_pwd})
+	</insert>
+
+	<!-- 로그인 확인 -->
+	<select id="idPwdCheck" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM member_tbl WHERE mem_id = #{mem_id} AND mem_pwd = #{mem_pwd} 
+	</select>
+</mapper>

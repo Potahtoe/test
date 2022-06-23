@@ -11,6 +11,6 @@
 
 	<!-- 로그인 확인 -->
 	<select id="idPwdCheck" parameterType="java.util.Map" resultType="int">
-		SELECT COUNT(*) FROM member_tbl WHERE mem_id = #{mem_id} AND mem_pwd = #{mem_pwd} 
+		SELECT COUNT(*) FROM member_tbl WHERE mem_id=#{strId} AND mem_pwd=#{strPwd} 
 	</select>
 </mapper>

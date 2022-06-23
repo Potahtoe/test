@@ -25,7 +25,7 @@
 	<h3 align="center">로그인</h3>
 	<form method="post" name="form" action="${path}/loginAction.do">
 		<table align="center">
-			<%-- <tr>
+			<tr>
 				<th>
 					<c:choose>
 						<c:when test="${selectCnt==-1}">
@@ -42,15 +42,15 @@
 						</c:otherwise>
 					</c:choose>
 				</th>
-			</tr> --%>
+			</tr>
 		
 			<tr>
 				<th>아이디</th>
-				<td><input type="text" class="input" name="id" size="30" placeholder="아이디를 입력하세요." autofocus required></td>
+				<td><input type="text" class="input" name="mem_id" size="30" placeholder="아이디를 입력하세요." autofocus required></td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>
-				<td><input type="password" class="input" name="password" size="30" placeholder="비밀번호를 입력하세요." required></td>
+				<td><input type="password" class="input" name="mem_pwd" size="30" placeholder="비밀번호를 입력하세요." required></td>
 			</tr>
 			<tr>
 				<td colspan="2">

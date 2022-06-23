@@ -28,12 +28,13 @@ public class MainServiceImpl implements MainService{
 		//dto 바구니 생성
 		MemberDto dto = new MemberDto();
 		
-		//입력된 id와 pwd를 dto에 담아서
+		//jsp에서 넘긴 id와 pwd 값을 dto에 담는다
 		dto.setMem_id(req.getParameter("mem_id"));
 		dto.setMem_pwd(req.getParameter("mem_pwd"));
 		
 		System.out.println("파라미터 mem_id : " + req.getParameter("mem_id"));
 		System.out.println("파라미터 mem_pwd : " + req.getParameter("mem_pwd"));
+		
 		//dao를 통해 db에 저장
 		int insertCnt = dao.signInAction(dto);
 		
@@ -61,7 +62,7 @@ public class MainServiceImpl implements MainService{
 		
 		//dao를 통해 db에 있는 id/pwd 정보와 일치하는지 비교하기
 		int selectCnt = dao.idPwdCheck(map);
-		
+		System.out.println("로그인 처리 selectCnt : " + selectCnt);
 		//일치하면 입력된 id를 세션id로 설정해주기
 		if(selectCnt==1) {
 			HttpSession session = req.getSession();

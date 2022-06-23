@@ -34,8 +34,10 @@ public class MainDaoImpl implements MainDao{
 	public int idPwdCheck(Map<String, Object> map) {
 		System.out.println("dao - 로그인 확인");
 		
-		MainDao dao = sqlSession.getMapper(MainDao.class);
-		return dao.idPwdCheck(map);
+		int selectCnt = sqlSession.selectOne("com.spring.test.dao.MainDao.idPwdCheck", map);
+		System.out.println("dao selectCnt : " + selectCnt);
+		//MainDao dao = sqlSession.getMapper(MainDao.class);
+		return selectCnt;
 	}
 
 }

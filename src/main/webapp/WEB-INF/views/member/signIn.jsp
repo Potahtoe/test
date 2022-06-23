@@ -10,6 +10,7 @@
 	$(function(){
 		$("#signIn").click(function(){
 			alert("회원가입")
+			var 
 			document.form.action="${path}/signInAction.do";
 			document.form.submit();
 		});
@@ -24,13 +25,13 @@
 			<tr>
 				<th>아이디</th>
 				<td>
-					<input type="text" name="id" size="30" placeholder="아이디를 입력하세요.">
+					<input type="text" name="mem_id" size="30" placeholder="아이디를 입력하세요.">
 				</td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>
 				<td>
-					<input type="password" name="password" size="30" placeholder="비밀번호를 입력하세요.">
+					<input type="password" name="mem_pwd" size="30" placeholder="비밀번호를 입력하세요.">
 				</td>
 			</tr>
 			<tr>

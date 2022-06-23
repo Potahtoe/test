@@ -11,7 +11,7 @@
 		$("#delete").click(function(){
 			alert("삭제");
 			document.form.action="${path}/boardDeleteAction.do";
-			document.form.submit;
+			document.form.submit();
 		});
 		$("#insert").click(function(){
 			location.href="${path}/boardInsert.do";

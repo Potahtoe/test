@@ -25,7 +25,7 @@
 	<h3 align="center">로그인</h3>
 	<form method="post" name="form" action="${path}/loginAction.do">
 		<table align="center">
-			<tr>
+			<tr align="center">
 				<th>
 					<c:choose>
 						<c:when test="${selectCnt==-1}">

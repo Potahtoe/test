@@ -16,7 +16,7 @@
 		$("#login").click(function(){
 			alert("로그인")
 			document.form.action="${path}/loginAction.do";
-			document.form.submit;
+			document.form.submit();
 		});
 	});
 </script>

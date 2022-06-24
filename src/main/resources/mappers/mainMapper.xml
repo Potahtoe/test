@@ -3,14 +3,75 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.test.dao.MainDao">
+	<!-- 회원가입 -->
 	<!-- 회원가입 처리 -->
 	<insert id="signInAction" parameterType="com.spring.test.dto.MemberDto">
 		INSERT INTO member_tbl(mem_id, mem_pwd)
 		VALUES(#{mem_id},#{mem_pwd})
 	</insert>
 
+	<!-- 로그인 -->
 	<!-- 로그인 확인 -->
 	<select id="idPwdCheck" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) FROM member_tbl WHERE mem_id=#{strId} AND mem_pwd=#{strPwd} 
+	</select>
+	
+	<!-- 게시판 -->
+	<!-- 게시글 수 -->
+	<select id="boardCnt" resultType="int">
+		SELECT COUNT(*) FROM board_tbl
+	</select>
+	
+<!-- 게시판 목록 조회 
+	<select id="boardList" parameterType="java.util.Map" resultType="com.spring.test.dto.BoardDto">
+		<![CDATA[
+			SELECT * FROM (SELECT A.*, row_no AS rn
+							FROM (
+								SELECT board_no, board_title, board_contents, board_writer, read_cnt, in_date
+								FROM board_tbl
+								ORDER BY board_no DESC
+								)A
+							)
+			WHERE rn >= #{start} AND rn <= #{end}
+		]]>
+	</select> -->
+	<!-- 게시판 목록 조회 -->
+	<select id="boardList" parameterType="java.util.Map" resultType="com.spring.test.dto.BoardDto">
+		SELECT board_no, board_title, board_contents, board_writer, read_cnt, in_date
+		FROM board_tbl
+		ORDER BY board_no DESC
+	</select>
+	<!-- 게시판 등록 -->
+	<insert id="boardInsertAction" parameterType="com.spring.test.dto.BoardDto">
+		INSERT INTO board_tbl(board_title, board_writer, board_contents,read_cnt,in_date)
+		VALUES(#{board_title},#{board_writer},#{board_contents},DEFAULT,DEFAULT)
+	</insert>
+	<!-- 조회수 증가 -->
+	<update id="plusReadCnt" parameterType="int">
+		UPDATE board_tbl SET read_cnt=(read_cnt+1) WHERE board_no = #{board_no}
+	</update>
+	<!-- 게시판 상세 조회 -->
+	<select id="boardDetail" parameterType="int" resultType="com.spring.test.dto.BoardDto">
+		SELECT * FROM board_tbl WHERE board_no = #{board_no}
+	</select>
+	<!-- 게시판 수정 화면 -->
+	<select id="boardUpdate" parameterType="int" resultType="com.spring.test.dto.BoardDto">
+		SELECT * FROM board_tbl WHERE board_no = #{board_no}
+	</select>
+	<!-- 게시판 수정 처리 -->
+	<update id="boardUpdateAction" parameterType="com.spring.test.dto.BoardDto">
+		UPDATE board_tbl
+		SET board_title=#{board_title}, board_contents=#{board_contents}
+		WHERE board_no=#{board_no}
+	</update>
+	<!-- 게시판 삭제 처리 -->
+	<delete id="boardDeleteAction" parameterType="com.spring.test.dto.BoardDto">
+		DELETE FROM board_tbl WHERE board_no=#{board_no}
+	</delete>
+	<!-- 게시판 검색 -->
+	<select id="boardSearch" parameterType="String" resultType="com.spring.test.dto.BoardDto">
+			SELECT * FROM board_tbl 
+			WHERE board_title LIKE CONCAT('%',#{searchContent},'%')
+			ORDER BY board_no DESC
 	</select>
 </mapper>

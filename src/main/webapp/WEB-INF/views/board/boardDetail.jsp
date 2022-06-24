@@ -8,9 +8,14 @@
 <title>게시판 상세</title>
 <script>
 	$(function(){
+		$("#delete").click(function(){
+			alert("삭제");
+			document.form.action="${path}/boardDeleteAction.do?board_no=${dto.board_no}";
+			document.form.submit();
+		});
 		$("#update").click(function(){
-			document.form.action="${path}/boardUpdate.do?board_no=${board_no}";
-			document.form.submit;
+			document.form.action="${path}/boardUpdate.do?board_no=${dto.board_no}";
+			document.form.submit();
 		});
 		$("#list").click(function(){
 			location.href="${path}/boardList.do"
@@ -23,19 +28,30 @@
 	<h3 align="center">게시판 상세</h3>
 	<form method="post" name="form">
 		<table align="center">
-			<c:forEach var="dto" items="${list}">
-				<tr>
-					<th>제목</th>
-					<td><textarea rows="1" cols="100" name="title" readonly>${dto.board_title}</textarea></td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td><textarea rows="10" cols="100" name="contents" readonly>${dto.board_contents}</textarea></td>
-				</tr>
-			</c:forEach>
-			<tr colspan="2">
+			<tr>
+				<th>제목</th>
+				<td><textarea rows="1" cols="100" name="board_title" readonly>${dto.board_title}</textarea></td>
+			</tr>
+			<tr>
+				<th>작성자</th>
+				<td>${dto.board_writer}</td>
+			</tr>
+			<tr>
+				<th>조회수</th>
+				<td>${dto.read_cnt}</td>
+			</tr>
+			<tr>
+				<th>작성일</th>
+				<td>${dto.in_date}</td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td><textarea rows="10" cols="100" name="board_contents" readonly>${dto.board_contents}</textarea></td>
+			</tr>
+			<tr colspan="2" align="center">
 				<td>
 				<input type="hidden" name="board_no" value="${dto.board_no}"> 
+				<input type="button" id="delete" value="삭제">
 				<input type="button" id="update" value="수정">
 				<input type="button" id="list" value="목록">
 				<td>

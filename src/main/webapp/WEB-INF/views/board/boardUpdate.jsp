@@ -10,7 +10,7 @@
 	$(function(){
 		$("#update").click(function(){
 			alert("수정");
-			document.form.action="location.href='${path}/boardUpdateAction.do'"
+			document.form.action="${path}/boardUpdateAction.do?board_no=${dto.board_no}"
 			document.form.submit();
 		})
 	})
@@ -22,14 +22,27 @@
 		<table align="center">
 			<tr>
 				<th>제목</th>
-				<td><td><textarea rows="1" cols="100" name="title" maxlength="100" autofocus required>${dto.board_title}</textarea></td>
+				<td><textarea rows="1" cols="100" name="board_title" maxlength="100" autofocus required>${dto.board_title}</textarea></td>
+			</tr>
+			<tr>
+				<th>작성자</th>
+				<td>${dto.board_writer}</td>
+			</tr>
+			<tr>
+				<th>조회수</th>
+				<td>${dto.read_cnt}</td>
+			</tr>
+			<tr>
+				<th>작성일</th>
+				<td>${dto.in_date}</td>
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea style="resize:vertical;" rows="10" cols="100" name="contents" maxlength="2000" required>${board_contents}</textarea></td>
+				<td><textarea rows="10" cols="100" name="board_contents" maxlength="2000" required>${dto.board_contents}</textarea></td>
 			</tr>
 			<tr>
 				<td align="right">
+					<input type="hidden" name="board_no" value="${dto.board_no}">
 					<input type="button" id="update" value="수정">
 				</td>
 			</tr>

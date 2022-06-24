@@ -20,6 +20,8 @@ public interface MainService {
 	public void boardInsertAction(HttpServletRequest req, Model model);
 	//게시판 상세 조회
 	public void boardDetail(HttpServletRequest req, Model model);
+	//게시판 수정 화면
+	public void boardUpdate(HttpServletRequest req, Model model);
 	//게시판 수정 처리
 	public void boardUpdateAction(HttpServletRequest req, Model model);
 	//게시판 삭제 처리

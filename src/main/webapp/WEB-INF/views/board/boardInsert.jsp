@@ -26,11 +26,15 @@
 		<table align="center">
 			<tr>
 				<th>제목</th>
-				<td><textarea rows="1" cols="100" name="title" maxlength="100" placeholder="제목을 입력하세요." autofocus required></textarea></td>
+				<td><textarea rows="1" cols="100" name="board_title" maxlength="100" placeholder="제목을 입력하세요." autofocus required></textarea></td>
+			</tr>
+			<tr>
+				<th>작성자</th>
+				<td><textarea rows="1" cols="100" name="board_writer" readonly>${sessionID}</textarea></td>
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea style="resize:vertical;" rows="10" cols="100" name="contents" maxlength="2000" placeholder="내용을 입력하세요." required></textarea></td>
+				<td><textarea style="resize:vertical;" rows="10" cols="100" name="board_contents" maxlength="2000" placeholder="내용을 입력하세요." required></textarea></td>
 			</tr>
 			<tr align="right">
 				<td>

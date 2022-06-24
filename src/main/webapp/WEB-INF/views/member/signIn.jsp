@@ -20,7 +20,7 @@
 <body>
 	<h3 align="center">회원가입</h3>
 	<form method="post" name="form" action="${path}/signInAction.do">
-		<input type="hidden" name="hiddenId" value="0">
+		<!-- <input type="hidden" name="hiddenId" value="0"> -->
 		<table align="center">
 			<tr>
 				<th>아이디</th>

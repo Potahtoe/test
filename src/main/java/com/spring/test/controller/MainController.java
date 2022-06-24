@@ -75,7 +75,7 @@ public class MainController {
 		public String boardList(HttpServletRequest req, Model model) {
 			logger.info("게시판 목록 조회");
 			
-			//service.boardList(req, model);
+			service.boardList(req, model);
 			return "board/boardList";
 		}
 		//게시판 등록 화면
@@ -105,6 +105,8 @@ public class MainController {
 		@RequestMapping("boardUpdate.do")
 		public String boardUpdate(HttpServletRequest req, Model model) {
 			logger.info("게시판 수정 화면");
+			
+			service.boardUpdate(req, model);
 			return "board/boardUpdate";
 		}
 		//게시판 수정 처리
@@ -125,5 +127,14 @@ public class MainController {
 			service.boardDeleteAction(req, model);
 			String viewPage = req.getContextPath() +"/boardList.do";
 			res.sendRedirect(viewPage);
+		}
+		
+		//게시판 검색
+		@RequestMapping("boardSearch.do")
+		public String boardSearch(HttpServletRequest req, Model model) {
+			logger.info("게시판 검색");
+			
+			service.boardSearch(req, model);
+			return "board/boardSearch";
 		}
 }

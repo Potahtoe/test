@@ -71,59 +71,22 @@ public class MainServiceImpl implements MainService{
 			HttpSession session = req.getSession();
 			session.setAttribute("sessionID", strId);
 		}
-		
 		System.out.println("로그인 처리 selectCnt : " + selectCnt);
+		
 		//위에서 구한 값을 jsp로 넘겨주기
 		model.addAttribute("selectCnt", selectCnt);
 	}
 	
 	//---------------게시판--------------------
-	/*//게시판 목록 조회
-	@Override
-	public void boardList(HttpServletRequest req, Model model) {
-		System.out.println("서비스 - 게시판 목록 조회");
-		
-		//페이지 값 화면에서 받아오기
-		String pageNum = req.getParameter("pageNum");
-		
-		//페이지 바구니 생성
-		Paging paging = new Paging(pageNum);
-		
-		//전체 게시글 카운트
-		int total = dao.boardCnt();
-		//전체 글 수 dto에 담기
-		paging.setTotalCount(total);
-		
-		//시작,끝 게시물번호값 변수에 담기
-		int start = paging.getStartRow();
-		int end = paging.getEndRow();
-		
-		//게시글 List 바구니 초기화
-		List<BoardDto> list = null;
-		
-		//게시글이 한 개라도 있으면
-		if(total>0) {
-			//HashMap에 처음과 끝 게시번호 담아서
-			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("start", start);
-			map.put("end", end);
-			
-			System.out.println("map : " + map);
-			//dao를 통해 db에 저장
-			list = dao.boardList(map);
-			System.out.println("게시판 목록 list : " + list);
-		}
-		//list와 paging 값 jsp로 전달하기
-		model.addAttribute("list", list);
-		model.addAttribute("paging", paging);
-	}
-	*/
 	//게시판 목록 조회
 	@Override
 	public void boardList(HttpServletRequest req, Model model) {
 		System.out.println("서비스 - 게시판 목록 조회");
 		
+		//dao를 통해 게시판 목록 불러와서 list에 담기
 		List<BoardDto> list = dao.boardList();
+		
+		//list를 jsp로 전달
 		model.addAttribute("list", list);
 	}
 
@@ -146,8 +109,8 @@ public class MainServiceImpl implements MainService{
 		
 		//dao를 통해 db에 저장
 		int insertCnt = dao.boardInsertAction(dto);
-		
 		System.out.println("insertCnt : " + insertCnt);
+		
 		//jsp로 처리 결과 전달
 		model.addAttribute("insertCnt", insertCnt);
 	}
@@ -202,11 +165,14 @@ public class MainServiceImpl implements MainService{
 		dto.setBoard_title(req.getParameter("board_title"));
 		dto.setBoard_contents(req.getParameter("board_contents"));
 		
+		System.out.println("게시글번호 파라미터 : " + Integer.parseInt(req.getParameter("board_no")));
 		System.out.println("제목 파라미터 : " + req.getParameter("board_title"));
 		System.out.println("내용 파라미터 : " + req.getParameter("board_contents"));
+		
 		//dao를 통해 db에 저장
 		int updateCnt = dao.boardUpdateAction(dto);
 		System.out.println("updateCnt : " + updateCnt);
+		
 		//jsp로 결과 전달
 		model.addAttribute("updateCnt", updateCnt);
 	}
@@ -222,7 +188,7 @@ public class MainServiceImpl implements MainService{
 		
 		//받아온 게시글 번호를 통해 db에 보낸다
 		int deleteCnt = dao.boardDeleteAction(board_no);
-		System.out.println("삭제 dto : " + deleteCnt);
+		System.out.println("삭제 deleteCnt : " + deleteCnt);
 		
 		//불러온 값을 jsp에 전달한다
 		model.addAttribute("deleteCnt", deleteCnt);
@@ -232,12 +198,16 @@ public class MainServiceImpl implements MainService{
 	public void boardSearch(HttpServletRequest req, Model model) {
 		System.out.println("서비스 - 게시판 검색");
 		
+		//화면에서 검색어 입력 받아오기
 		String searchContent = req.getParameter("searchContent");
 		System.out.println("searchContent : " + searchContent);
+		
+		//dao를 통해 검색값을 list에 담기
 		List<BoardDto> list = dao.boardSearch(searchContent);
 		System.out.println("list : " + list);
+		
+		//결과값 jsp에 전달
 		model.addAttribute("list", list);
-		model.addAttribute("searchContent",searchContent);
 	}
 
 

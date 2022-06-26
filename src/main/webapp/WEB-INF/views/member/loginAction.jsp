@@ -35,19 +35,16 @@
 		<c:if test="${sessionScope.sessionID == null}">
 			<table align="center">
 				<tr>
-					<td colspan="4" align="center">
+					<th colspan="4" align="center">
 						<c:choose>
-							<c:when test="${selectCnt == -1}">
-								<h4>비밀번호 오류</h4>
-							</c:when>
 							<c:when test="${selectCnt == 0}">
-								<h4>존재하지 않는 아이디</h4>
+								존재하지 않는 아이디
 							</c:when>
 							<c:otherwise>
-								<h4>환영합니다.</h4>
+								환영합니다.
 							</c:otherwise>
 						</c:choose>
-					</td>
+					</th>
 				</tr>
 				<tr>
 					<th>아이디</th>

@@ -23,8 +23,8 @@
 	<h3 align="center">게시판 목록</h3>
 	<form method="post" name="form">
 		<table align="center">
-			<tr align="center">
-				<td>
+			<tr>
+				<td colspan="5" align="right">
 					<input type="text" name="searchContent" size="30" placeholder="검색어를 입력하세요.">
 					<input type="button" id="search" value="검색">
 				</td>
@@ -64,7 +64,7 @@
 			</tr>
 			<!-- 페이징 끝 --> --%>
 			<tr>
-				<td colspan="7" align="right">
+				<td colspan="5" align="right">
 					<input type="button" id="insert" value="글쓰기">
 				</td>
 			</tr>

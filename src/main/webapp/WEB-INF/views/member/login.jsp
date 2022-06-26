@@ -12,25 +12,16 @@
 			alert("회원가입")
 			location.href="${path}/signIn.do";
 		});
-		
-		/* $("#login").click(function(){
-			alert("로그인")
-			document.form.action="${path}/loginAction.do";
-			document.form.submit();
-		}) */
-	})
+	});
 </script>
 </head>
 <body>
 	<h3 align="center">로그인</h3>
 	<form method="post" name="form" action="${path}/loginAction.do">
 		<table align="center">
-			<tr align="center">
-				<th>
+			<tr>
+				<th colspan="4" align="center">
 					<c:choose>
-						<c:when test="${selectCnt==-1}">
-							비밀번호 불일치
-						</c:when>
 						<c:when test="${selectCnt==0}">
 							존재하지 않는 아이디
 						</c:when>

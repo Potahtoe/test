@@ -9,11 +9,10 @@
 <script>
 	$(function(){
 		$("#update").click(function(){
-			alert("수정");
 			document.form.action="${path}/boardUpdateAction.do?board_no=${dto.board_no}"
 			document.form.submit();
-		})
-	})
+		});
+	});
 </script>
 </head>
 <body>

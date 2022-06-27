@@ -13,7 +13,6 @@
 		});
 		
 		$("#insert").click(function(){
-			alert("등록");
 			document.form.action="${path}/boardInsertAction.do";
 			document.form.submit();
 		});

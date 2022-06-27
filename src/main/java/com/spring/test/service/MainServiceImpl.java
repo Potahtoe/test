@@ -83,11 +83,29 @@ public class MainServiceImpl implements MainService{
 	public void boardList(HttpServletRequest req, Model model) {
 		System.out.println("서비스 - 게시판 목록 조회");
 		
-		//dao를 통해 게시판 목록 불러와서 list에 담기
-		List<BoardDto> list = dao.boardList();
+		//
+		String pageNum = req.getParameter("pageNum");
+		Paging paging = new Paging(pageNum);
+		int total = dao.boardCnt();
+		paging.setTotalCount(total);
 		
+		int start = paging.getStartRow();
+		int end = paging.getEndRow();
+		
+		List<BoardDto> list = null;
+		if(total>0) {
+			Map<String, Object> map = new HashMap<String,Object>();
+			map.put("start", start);
+			map.put("end", end);
+			list=dao.boardList(map);
+		}
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
+		System.out.println("list : " + list);
+				
 		//list를 jsp로 전달
 		model.addAttribute("list", list);
+		model.addAttribute("paging", paging);
 	}
 
 	//게시판 등록 처리

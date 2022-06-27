@@ -12,7 +12,6 @@
 			location.href="${path}/boardInsert.do";
 		});
 		$("#search").click(function(){
-			alert("검색");
 			document.form.action="${path}/boardSearch.do";
 			document.form.submit();
 		});
@@ -39,14 +38,34 @@
 			<c:forEach var="dto" items="${list}">
 				<tr>
 					<th>${dto.board_no}</th>
-					<th><a href="${path}/boardDetail.do?board_no=${dto.board_no}">${dto.board_title}</a></th>
+					<th><a href="${path}/boardDetail.do?board_no=${dto.board_no}&pageNum=${pageNum}">${dto.board_title}</a></th>
 					<th>${dto.board_writer}</th>
 					<th>${dto.read_cnt}</th>
 					<th>${dto.in_date}</th>
 				</tr>
 			</c:forEach>
+          	<!-- 페이징 처리 -->
+			<tr>
+	           	<td colspan="5" align="center">
+		          	<!-- 이전버튼 활성화 여부 -->
+		          	<c:if test="${paging.startPage>10}">
+		          		<a href="${path}/boardList.do?pageNum=${paging.prev}">[이전]</a>
+		          	</c:if>
+		          	
+		          	<!-- 페이지 번호 처리 -->
+		          	<c:forEach var="board_no" begin="${paging.startPage}" end="${paging.endPage}">
+		          		<a href="${path}/boardList.do?pageNum=${board_no}">${board_no}</a>
+		          	</c:forEach>
+		          	
+		          	<!-- 다음 버튼 활성화 여부 -->
+		          	<c:if test="${paging.endPage<paging.pageCount}">
+		          		<a href="${path}/boardList.do?pageNum=${paging.next}">[다음]</a>
+		          	</c:if>
+	          	</td>
+            </tr>
 			<tr>
 				<td colspan="5" align="right">
+					<input type="hidden" name="pageNum" value="${pageNum}">
 					<input type="button" id="insert" value="글쓰기">
 				</td>
 			</tr>

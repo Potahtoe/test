@@ -9,7 +9,6 @@
 <script>
 	$(function(){
 		$("#delete").click(function(){
-			alert("삭제");
 			document.form.action="${path}/boardDeleteAction.do?board_no=${dto.board_no}";
 			document.form.submit();
 		});

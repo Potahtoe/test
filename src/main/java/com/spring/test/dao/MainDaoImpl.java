@@ -1,9 +1,8 @@
 package com.spring.test.dao;
 
 import java.util.List;
-import java.util.Map;
 
-import javax.sql.DataSource;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +23,7 @@ public class MainDaoImpl implements MainDao{
 	public int signInAction(MemberDto dto) {
 		System.out.println("dao - 회원가입 처리");
 		
-		//MainDao dao = sqlSession.getMapper(MainDao.class);
 		int insertCnt = sqlSession.insert("com.spring.test.dao.MainDao.signInAction", dto);
-		System.out.println("insertCnt : " + insertCnt);
 		return insertCnt;
 	}
 
@@ -37,8 +34,6 @@ public class MainDaoImpl implements MainDao{
 		System.out.println("dao - 로그인 확인");
 		
 		int selectCnt = sqlSession.selectOne("com.spring.test.dao.MainDao.idPwdCheck", map);
-		System.out.println("dao selectCnt : " + selectCnt);
-		//MainDao dao = sqlSession.getMapper(MainDao.class);
 		return selectCnt;
 	}
 	
@@ -46,30 +41,19 @@ public class MainDaoImpl implements MainDao{
 	//게시글 수
 	@Override
 	public int boardCnt() {
-		System.out.println("dao - 게시글 수");
+		System.out.println("dao - 게시판 게시글 수");
 		
 		MainDao dao = sqlSession.getMapper(MainDao.class);
 		return dao.boardCnt();
 	}
-
-	/*
+	
 	//게시판 목록 조회
 	@Override
-	public List<BoardDto> boardList(Map<String, Object> map) {
+	public List<BoardDto> boardList(Map<String,Object> map) {
 		System.out.println("dao - 게시판 목록 조회");
 		
 		MainDao dao = sqlSession.getMapper(MainDao.class);
 		List<BoardDto> list = dao.boardList(map);
-		return list;
-	}
-	*/
-	//게시판 목록 조회
-	@Override
-	public List<BoardDto> boardList() {
-		System.out.println("dao - 게시판 목록 조회");
-		
-		MainDao dao = sqlSession.getMapper(MainDao.class);
-		List<BoardDto> list = dao.boardList();
 		return list;
 	}
 
@@ -127,10 +111,24 @@ public class MainDaoImpl implements MainDao{
 		return dao.boardDeleteAction(board_no);
 	}
 
+	/*
+	 * //검색글 수
+	 * 
+	 * @Override public int searchCnt(String searchContent) {
+	 * System.out.println("dao - 게시판 검색글 수");
+	 * 
+	 * MainDao dao = sqlSession.getMapper(MainDao.class); return
+	 * dao.searchCnt(searchContent); }
+	 */
+	
+	//게시판 검색
 	@Override
 	public List<BoardDto> boardSearch(String searchContent) {
+		System.out.println("dao - 게시판 검색");
+		
 		MainDao dao = sqlSession.getMapper(MainDao.class);
 		return dao.boardSearch(searchContent);
 	}
+
 
 }

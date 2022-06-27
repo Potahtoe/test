@@ -6,21 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>SignIn</title>
-<!-- <script>
-	$(function(){
-		$("#signIn").click(function(){
-			alert("회원가입")
-			var 
-			document.form.action="${path}/signInAction.do";
-			document.form.submit();
-		});
-	});
-</script> -->
 </head>
 <body>
 	<h3 align="center">회원가입</h3>
 	<form method="post" name="form" action="${path}/signInAction.do">
-		<!-- <input type="hidden" name="hiddenId" value="0"> -->
 		<table align="center">
 			<tr>
 				<th>아이디</th>

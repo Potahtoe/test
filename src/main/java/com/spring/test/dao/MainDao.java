@@ -19,11 +19,8 @@ public interface MainDao {
 	//-------게시판---------
 	//게시글 수
 	public int boardCnt();
-	/*//게시판 목록 조회
-	public List<BoardDto> boardList(Map<String,Object> map);
-	*/
 	//게시판 목록 조회
-	public List<BoardDto> boardList();
+	public List<BoardDto> boardList(Map<String,Object> map);
 	//게시글 등록 처리
 	public int boardInsertAction(BoardDto dto);
 	//조회수 증가
@@ -36,6 +33,10 @@ public interface MainDao {
 	public int boardUpdateAction(BoardDto dto);
 	//게시판 삭제 처리
 	public int boardDeleteAction(int board_no);
+
+	/*
+	 * //검색글 수 public int searchCnt(String searchContent);
+	 */
 	//게시판 검색
 	public List<BoardDto> boardSearch(String searchContent);
 	

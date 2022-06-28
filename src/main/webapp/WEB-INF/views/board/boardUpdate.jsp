@@ -9,7 +9,7 @@
 <script>
 	$(function(){
 		$("#update").click(function(){
-			document.form.action="${path}/boardUpdateAction.do?board_no=${dto.board_no}"
+			document.form.action="${path}/boardUpdateAction.do?board_no=${dto.board_no}&pageNum=${crtPage}"
 			document.form.submit();
 		});
 	});
@@ -41,6 +41,7 @@
 			</tr>
 			<tr>
 				<td align="right">
+					<input type="hidden" name="pageNum" value="${crtPage}">
 					<input type="hidden" name="board_no" value="${dto.board_no}">
 					<input type="button" id="update" value="수정">
 				</td>

@@ -35,14 +35,17 @@
 				<th>조회수</th>
 				<th>작성일</th>
 			</tr>
+			<c:set var="num" value="${total-((paging.currentPage-1)*10)}"/>
 			<c:forEach var="dto" items="${list}">
 				<tr>
-					<th>${dto.board_no}</th>
-					<th><a href="${path}/boardDetail.do?board_no=${dto.board_no}&pageNum=${pageNum}">${dto.board_title}</a></th>
+					<th>${num}</th>
+					<%-- <th>${dto.board_no}</th> --%>
+					<th><a href="${path}/boardDetail.do?board_no=${dto.board_no}&crtPage=${paging.currentPage}">${dto.board_title}</a></th>
 					<th>${dto.board_writer}</th>
 					<th>${dto.read_cnt}</th>
 					<th>${dto.in_date}</th>
 				</tr>
+				<c:set var="num" value="${num-1}" />
 			</c:forEach>
           	<!-- 페이징 처리 -->
 			<tr>
@@ -65,7 +68,7 @@
             </tr>
 			<tr>
 				<td colspan="5" align="right">
-					<input type="hidden" name="pageNum" value="${pageNum}">
+					<input type="hidden" name="crtPage" value="${paging.currentPage}">
 					<input type="button" id="insert" value="글쓰기">
 				</td>
 			</tr>

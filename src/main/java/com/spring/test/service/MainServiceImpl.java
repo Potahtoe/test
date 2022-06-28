@@ -87,9 +87,11 @@ public class MainServiceImpl implements MainService{
 		String pageNum = req.getParameter("pageNum");
 		Paging paging = new Paging(pageNum);
 		int total = dao.boardCnt();
+		System.out.println("total : " + total);
+		
 		paging.setTotalCount(total);
 		
-		int start = paging.getStartRow();
+		int start = paging.getStartRow()-1;
 		int end = paging.getEndRow();
 		
 		List<BoardDto> list = null;
@@ -106,6 +108,7 @@ public class MainServiceImpl implements MainService{
 		//list를 jsp로 전달
 		model.addAttribute("list", list);
 		model.addAttribute("paging", paging);
+		model.addAttribute("total", total);
 	}
 
 	//게시판 등록 처리
@@ -139,6 +142,7 @@ public class MainServiceImpl implements MainService{
 		System.out.println("서비스 - 게시판 상세 조회");
 		
 		//화면에서 게시글 번호 받아오기
+		String pageNum = req.getParameter("crtPage");
 		int board_no = Integer.parseInt(req.getParameter("board_no"));
 		System.out.println("게시글 번호 : " + board_no);
 		
@@ -151,6 +155,7 @@ public class MainServiceImpl implements MainService{
 		
 		//불러온 값을 jsp에 전달한다
 		model.addAttribute("dto", dto);
+		model.addAttribute("crtPage", pageNum);
 	}
 
 	//게시판 수정 화면
@@ -159,6 +164,7 @@ public class MainServiceImpl implements MainService{
 		System.out.println("서비스 - 게시판 수정 화면");
 		
 		//화면에서 게시글 번호 받아오기
+		String pageNum = req.getParameter("crtPage");
 		int board_no = Integer.parseInt(req.getParameter("board_no"));
 		System.out.println("게시글 번호 : " + board_no);
 		
@@ -168,6 +174,7 @@ public class MainServiceImpl implements MainService{
 		
 		//불러온 값을 jsp에 전달한다
 		model.addAttribute("dto", dto);
+		model.addAttribute("crtPage", pageNum);
 	}
 	
 	//게시판 수정 처리

@@ -3,6 +3,7 @@ package com.spring.test.dto;
 import java.sql.Date;
 
 public class BoardDto {
+	private int num;//게시글번호
 	private int board_no; //게시글번호
 	private String board_title; //제목
 	private String board_contents; //내용
@@ -11,6 +12,14 @@ public class BoardDto {
 	private Date in_date; //작성일
 	
 	public BoardDto() {}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
 
 	public int getBoard_no() {
 		return board_no;
@@ -62,7 +71,11 @@ public class BoardDto {
 
 	@Override
 	public String toString() {
-		return "BoardDto [board_no=" + board_no + ", board_title=" + board_title + ", board_contents=" + board_contents
-				+ ", board_writer=" + board_writer + ", read_cnt=" + read_cnt + ", in_date=" + in_date + "]";
+		return "BoardDto [num=" + num + ", board_no=" + board_no + ", board_title=" + board_title + ", board_contents="
+				+ board_contents + ", board_writer=" + board_writer + ", read_cnt=" + read_cnt + ", in_date=" + in_date
+				+ "]";
 	}
+	
+	
+
 }

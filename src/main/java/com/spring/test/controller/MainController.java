@@ -111,12 +111,20 @@ public class MainController {
 		}
 		//게시판 수정 처리
 		@RequestMapping("boardUpdateAction.do")
-		public void boardUpdateAction(HttpServletRequest req, HttpServletResponse res, Model model) throws IOException {
+		public String boardUpdateAction(HttpServletRequest req, HttpServletResponse res, Model model) throws IOException {
 			logger.info("게시판 수정 처리");
 			
+			int board_no = Integer.parseInt(req.getParameter("board_no"));
+			String pageNum = req.getParameter("pageNum");
+			
 			service.boardUpdateAction(req, model);
-			String viewPage = req.getContextPath() +"/boardList.do";
-			res.sendRedirect(viewPage);
+			/*
+			 * String viewPage = req.getContextPath() +"/boardList.do";
+			 * res.sendRedirect(viewPage);
+			 */
+			req.setAttribute("board_no", board_no);
+			req.setAttribute("pageNum", pageNum);
+			return "forward:/boardList";
 		}
 		
 		//게시판 삭제 처리

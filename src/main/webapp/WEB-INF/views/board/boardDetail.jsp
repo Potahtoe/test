@@ -9,15 +9,15 @@
 <script>
 	$(function(){
 		$("#delete").click(function(){
-			document.form.action="${path}/boardDeleteAction.do?board_no=${dto.board_no}";
+			document.form.action="${path}/boardDeleteAction.do?board_no=${dto.board_no}&pageNum=${crtPage}";
 			document.form.submit();
 		});
 		$("#update").click(function(){
-			document.form.action="${path}/boardUpdate.do?board_no=${dto.board_no}";
+			document.form.action="${path}/boardUpdate.do?board_no=${dto.board_no}&pageNum=${crtPage}";
 			document.form.submit();
 		});
 		$("#list").click(function(){
-			location.href="${path}/boardList.do"
+			location.href="${path}/boardList.do?board_no=${dto.board_no}&pageNum=${crtPage}"
 		});	
 	});
 
@@ -49,6 +49,7 @@
 			</tr>
 			<tr colspan="2" align="center">
 				<td>
+				<input type="hidden" name="pageNum" value="${crtPage}"> 
 				<input type="hidden" name="board_no" value="${dto.board_no}"> 
 				<input type="button" id="delete" value="삭제">
 				<input type="button" id="update" value="수정">

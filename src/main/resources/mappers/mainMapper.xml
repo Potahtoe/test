@@ -33,6 +33,7 @@
 		select count(*)
 		from board_tbl
 	</select>
+	
 	<!-- 게시판 목록 조회  -->
 	<select id="boardList" parameterType="java.util.Map" resultType="com.spring.test.dto.BoardDto">
 		select	board_no
@@ -46,23 +47,7 @@
 		limit 	10
 		offset #{start}
 	</select>
-	<!-- 게시판 목록 조회 -->
-<!-- 	<select id="boardList" parameterType="java.util.Map" resultType="com.spring.test.dto.BoardDto">
-		<![CDATA[
-			SET @rownum:=0;
-			SELECT * 
-			FROM (SELECT @rownum:=@rownum+1 as rn,
-						A.*
-					FROM (
-						SELECT board_no, board_title, board_contents, board_writer, read_cnt, in_date
-						FROM board_tbl
-	                   	ORDER BY board_no DESC
-	                  ) A 
-			       )
-			WHERE rn >=#{start} AND rn <=#{end}
-		]]>
-	</select> -->
-	
+
 	<!-- 게시판 등록 -->
 	<insert id="boardInsertAction" parameterType="com.spring.test.dto.BoardDto">
 		insert into board_tbl

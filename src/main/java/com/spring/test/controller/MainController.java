@@ -116,15 +116,15 @@ public class MainController {
 			
 			int board_no = Integer.parseInt(req.getParameter("board_no"));
 			String pageNum = req.getParameter("pageNum");
+			logger.info("board_no : " + board_no);
+			logger.info("pageNum : " + pageNum);
 			
 			service.boardUpdateAction(req, model);
-			/*
-			 * String viewPage = req.getContextPath() +"/boardList.do";
-			 * res.sendRedirect(viewPage);
-			 */
+			
 			req.setAttribute("board_no", board_no);
 			req.setAttribute("pageNum", pageNum);
-			return "forward:/boardList";
+			
+			return "redirect:boardList.do";
 		}
 		
 		//게시판 삭제 처리

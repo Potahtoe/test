@@ -56,8 +56,8 @@
 		          	</c:if>
 		          	
 		          	<!-- 페이지 번호 처리 -->
-		          	<c:forEach var="board_no" begin="${paging.startPage}" end="${paging.endPage}">
-		          		<a href="${path}/boardList.do?pageNum=${board_no}">${board_no}</a>
+		          	<c:forEach var="pgnum" begin="${paging.startPage}" end="${paging.endPage}">
+		          		<a href="${path}/boardList.do?pageNum=${pgnum}">${pgnum}</a>
 		          	</c:forEach>
 		          	
 		          	<!-- 다음 버튼 활성화 여부 -->

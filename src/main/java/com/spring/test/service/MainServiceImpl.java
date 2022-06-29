@@ -145,6 +145,7 @@ public class MainServiceImpl implements MainService{
 		String pageNum = req.getParameter("crtPage");
 		int board_no = Integer.parseInt(req.getParameter("board_no"));
 		System.out.println("게시글 번호 : " + board_no);
+		System.out.println("pageNum : " + pageNum);
 		
 		//상세 클릭할 때마다 조회수 증가
 		dao.plusReadCnt(board_no);
@@ -167,6 +168,7 @@ public class MainServiceImpl implements MainService{
 		String pageNum = req.getParameter("crtPage");
 		int board_no = Integer.parseInt(req.getParameter("board_no"));
 		System.out.println("게시글 번호 : " + board_no);
+		System.out.println("pageNum : " + pageNum);
 		
 		//받아온 게시글 번호를 통해 db에 저장된 값을 불러온다
 		BoardDto dto = dao.boardUpdate(board_no);
@@ -186,7 +188,8 @@ public class MainServiceImpl implements MainService{
 		BoardDto dto = new BoardDto();
 		
 		//화면에 입력된 값 불러와서 dto에 담기
-		dto.setBoard_no(Integer.parseInt(req.getParameter("board_no")));
+		String pageNum = req.getParameter("crtPage");
+		int board_no = Integer.parseInt(req.getParameter("board_no"));
 		dto.setBoard_title(req.getParameter("board_title"));
 		dto.setBoard_contents(req.getParameter("board_contents"));
 		
@@ -197,9 +200,13 @@ public class MainServiceImpl implements MainService{
 		//dao를 통해 db에 저장
 		int updateCnt = dao.boardUpdateAction(dto);
 		System.out.println("updateCnt : " + updateCnt);
+		System.out.println("pageNum : " + pageNum);
+		System.out.println("board_no : " + board_no);
 		
 		//jsp로 결과 전달
 		model.addAttribute("updateCnt", updateCnt);
+		model.addAttribute("crtPage", pageNum);
+		model.addAttribute("board_no", board_no);
 	}
 
 	//게시판 삭제 처리

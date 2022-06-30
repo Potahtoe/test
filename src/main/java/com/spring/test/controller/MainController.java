@@ -119,23 +119,35 @@ public class MainController {
 			
 			int board_no = Integer.parseInt(req.getParameter("board_no"));
 			
-			service.boardUpdateAction(req, model, redirect);
+			service.boardUpdateAction(req, model);
 			req.setAttribute("board_no", board_no); 
 			
 			model.asMap().clear();
 			redirect.addAttribute("pageNum", pageNum);
 			redirect.addAttribute("searchContent", searchContent);
-			return "redirect:boardList.do";
+			
+			if(searchContent=="") {
+				return "redirect:boardList.do";
+			}else {
+				return "redirect:boardSearch.do";
+			}
 		}
 
 		//게시판 삭제 처리
 		@RequestMapping("boardDeleteAction.do")
-		public void boardDeleteAction(HttpServletRequest req, HttpServletResponse res, Model model) throws IOException {
+		public String boardDeleteAction(@RequestParam("crtPage") String pageNum, @RequestParam("searchContent") String searchContent, HttpServletRequest req, Model model, RedirectAttributes redirect) {
 			logger.info("게시판 삭제 처리");
 			
 			service.boardDeleteAction(req, model);
-			String viewPage = req.getContextPath() +"/boardList.do";
-			res.sendRedirect(viewPage);
+			model.asMap().clear();
+			redirect.addAttribute("pageNum", pageNum);
+			redirect.addAttribute("searchContent", searchContent);
+			
+			if(searchContent=="") {
+				return "redirect:boardList.do";
+			}else {
+				return "redirect:boardSearch.do";
+			}
 		}
 		
 		//게시판 검색

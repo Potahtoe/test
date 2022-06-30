@@ -8,10 +8,6 @@
 <title>게시판 등록</title>
 <script>
 	$(function(){
-		$("#list").click(function(){
-			location.href="${path}/boardList.do";
-		});
-		
 		$("#insert").click(function(){
 			document.form.action="${path}/boardInsertAction.do";
 			document.form.submit();
@@ -38,7 +34,6 @@
 			<tr align="right">
 				<td>
 					<input type="button" id="insert" value="등록">
-					<input type="button" id="list" value="목록">
 				</td>
 			</tr>
 		</table>

@@ -125,10 +125,6 @@ public class MainServiceImpl implements MainService{
 		dto.setBoard_writer(req.getParameter("board_writer"));
 		dto.setBoard_contents(req.getParameter("board_contents"));
 		
-		System.out.println("파라미터값 title : " + req.getParameter("board_title"));
-		System.out.println("파라미터값 writer : " + req.getParameter("board_writer"));
-		System.out.println("파라미터값 contents : " + req.getParameter("board_contents"));
-		
 		//dao를 통해 db에 저장
 		int insertCnt = dao.boardInsertAction(dto);
 		System.out.println("insertCnt : " + insertCnt);
@@ -146,9 +142,6 @@ public class MainServiceImpl implements MainService{
 		String pageNum = req.getParameter("crtPage");
 		int board_no = Integer.parseInt(req.getParameter("board_no"));
 		String searchContent = req.getParameter("searchContent");
-		System.out.println("게시글 번호 : " + board_no);
-		System.out.println("pageNum : " + pageNum);
-		System.out.println("searchContent : " + searchContent);
 		
 		//상세 클릭할 때마다 조회수 증가
 		dao.plusReadCnt(board_no);
@@ -171,9 +164,6 @@ public class MainServiceImpl implements MainService{
 		String pageNum = req.getParameter("crtPage");
 		int board_no = Integer.parseInt(req.getParameter("board_no"));
 		String searchContent = req.getParameter("searchContent");
-		System.out.println("게시글 번호 : " + board_no);
-		System.out.println("pageNum : " + pageNum);
-		System.out.println("searchContent : " + searchContent);
 		
 		//받아온 게시글 번호를 통해 db에 저장된 값을 불러온다
 		BoardDto dto = dao.boardUpdate(board_no);
@@ -186,7 +176,7 @@ public class MainServiceImpl implements MainService{
 	
 	//게시판 수정 처리
 	@Override
-	public void boardUpdateAction(HttpServletRequest req, Model model, RedirectAttributes redirect) {
+	public void boardUpdateAction(HttpServletRequest req, Model model) {
 		System.out.println("서비스 - 게시판 수정 처리");
 		
 		//dto 주머니 생성
@@ -196,6 +186,7 @@ public class MainServiceImpl implements MainService{
 		String pageNum = req.getParameter("crtPage");
 		int board_no = Integer.parseInt(req.getParameter("board_no"));
 		String searchContent = req.getParameter("searchContent");
+		
 		dto.setBoard_no(Integer.parseInt(req.getParameter("board_no")));
 		dto.setBoard_title(req.getParameter("board_title"));
 		dto.setBoard_contents(req.getParameter("board_contents"));
@@ -217,9 +208,9 @@ public class MainServiceImpl implements MainService{
 		System.out.println("서비스 - 게시판 삭제 처리");
 		
 		//화면에서 게시글 번호 받아오기
+		String pageNum = req.getParameter("crtPage");
 		int board_no = Integer.parseInt(req.getParameter("board_no"));
 		String searchContent = req.getParameter("searchContent");
-		System.out.println("게시글 번호 : " + board_no);
 		
 		//받아온 게시글 번호를 통해 db에 보낸다
 		int deleteCnt = dao.boardDeleteAction(board_no);
@@ -227,6 +218,7 @@ public class MainServiceImpl implements MainService{
 		
 		//불러온 값을 jsp에 전달한다
 		model.addAttribute("deleteCnt", deleteCnt);
+		model.addAttribute("crtPage", pageNum);
 		model.addAttribute("searchContent", searchContent);
 	}
 	//게시판 검색
@@ -243,13 +235,12 @@ public class MainServiceImpl implements MainService{
 		int total = dao.searchCnt(searchContent);
 		paging.setTotalCount(total);
 		int start = paging.getStartRow()-1;
-		//int end = paging.getEndRow();
+		
 		//dao를 통해 검색값을 list에 담기
 		List<BoardDto> list = null; 
 		if(total>0) {
 			Map<String, Object> map = new HashMap<String,Object>();
 			map.put("start", start);
-			//map.put("end", end);
 			map.put("searchContent", searchContent);
 			list=dao.boardSearch(map);
 		}

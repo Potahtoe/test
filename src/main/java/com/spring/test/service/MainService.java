@@ -24,7 +24,7 @@ public interface MainService {
 	//게시판 수정 화면
 	public void boardUpdate(HttpServletRequest req, Model model);
 	//게시판 수정 처리
-	public void boardUpdateAction(HttpServletRequest req, Model model, RedirectAttributes redirect);
+	public void boardUpdateAction(HttpServletRequest req, Model model);
 	//게시판 삭제 처리
 	public void boardDeleteAction(HttpServletRequest req, Model model);
 	//게시판 검색

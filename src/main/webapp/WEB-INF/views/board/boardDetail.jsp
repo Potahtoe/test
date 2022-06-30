@@ -9,11 +9,11 @@
 <script>
 	$(function(){
 		$("#delete").click(function(){
-			document.form.action="${path}/boardDeleteAction.do?board_no=${dto.board_no}&pageNum=${crtPage}&searchContent=${searchContent}";
+			document.form.action="${path}/boardDeleteAction.do";
 			document.form.submit();
 		});
 		$("#update").click(function(){
-			document.form.action="${path}/boardUpdate.do?board_no=${dto.board_no}&crtPage=${crtPage}&searchContent=${searchContent}";
+			document.form.action="${path}/boardUpdate.do?board_no=${dto.board_no}&pageNum=${crtPage}&searchContent=${searchContent}";
 			document.form.submit();
 		});
 		
@@ -21,9 +21,9 @@
 			var searchContent =$('input[name=searchContent]').val();
 			
 			if(searchContent==""){
-					location.href="${path}/boardList.do?board_no=${dto.board_no}&pageNum=${crtPage}&searchContent=${searchContent}"
+					location.href="${path}/boardList.do?board_no=${dto.board_no}&pageNum=${crtPage}&searchContent=${searchContent}";
 			}else{
-					location.href="${path}/boardSearch.do?board_no=${dto.board_no}&pageNum=${crtPage}&searchContent=${searchContent}"
+					location.href="${path}/boardSearch.do?board_no=${dto.board_no}&pageNum=${crtPage}&searchContent=${searchContent}";
 			}
 		});
 	});

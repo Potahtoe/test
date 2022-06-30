@@ -144,6 +144,6 @@ public class MainController {
 			logger.info("게시판 검색");
 			
 			service.boardSearch(req, model);
-			return "board/boardSearch";
+			return "board/boardList";
 		}
 }

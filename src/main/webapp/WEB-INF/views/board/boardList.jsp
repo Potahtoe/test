@@ -39,7 +39,6 @@
 			<c:forEach var="dto" items="${list}">
 				<tr>
 					<th>${num}</th>
-					<%-- <th>${dto.board_no}</th> --%>
 					<th><a href="${path}/boardDetail.do?board_no=${dto.board_no}&crtPage=${paging.currentPage}">${dto.board_title}</a></th>
 					<th>${dto.board_writer}</th>
 					<th>${dto.read_cnt}</th>
@@ -68,6 +67,7 @@
             </tr>
 			<tr>
 				<td colspan="5" align="right">
+					<input type="hidden" name="searchContent" value="${searchContent}">
 					<input type="hidden" name="crtPage" value="${paging.currentPage}">
 					<input type="button" id="insert" value="글쓰기">
 				</td>

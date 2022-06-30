@@ -2,6 +2,7 @@ package com.spring.test.service;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 public interface MainService {
 	
@@ -23,7 +24,7 @@ public interface MainService {
 	//게시판 수정 화면
 	public void boardUpdate(HttpServletRequest req, Model model);
 	//게시판 수정 처리
-	public void boardUpdateAction(HttpServletRequest req, Model model);
+	public void boardUpdateAction(HttpServletRequest req, Model model, RedirectAttributes redirect);
 	//게시판 삭제 처리
 	public void boardDeleteAction(HttpServletRequest req, Model model);
 	//게시판 검색

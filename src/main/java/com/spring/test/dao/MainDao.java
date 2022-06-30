@@ -33,11 +33,9 @@ public interface MainDao {
 	public int boardUpdateAction(BoardDto dto);
 	//게시판 삭제 처리
 	public int boardDeleteAction(int board_no);
-
-	/*
-	 * //검색글 수 public int searchCnt(String searchContent);
-	 */
+	//검색글 수 
+	public int searchCnt(String searchContent);
 	//게시판 검색
-	public List<BoardDto> boardSearch(String searchContent);
+	public List<BoardDto> boardSearch(Map<String,Object> map);
 	
 }

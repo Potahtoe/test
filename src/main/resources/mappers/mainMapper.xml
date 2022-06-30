@@ -105,10 +105,10 @@
 	</delete>
 	
 	<!-- 검색글 수 -->
-<!-- 	<select id="searchCnt" parameterType="String" resultType="int">
+ 	<select id="searchCnt" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM board_tbl
 		WHERE board_title LIKE CONCAT('%',#{searchContent},'%')
-	</select> -->
+	</select>
 	
 	<!-- 게시판 검색 -->
 	<select id="boardSearch" parameterType="java.util.Map" resultType="com.spring.test.dto.BoardDto">
@@ -117,5 +117,7 @@
 		where	board_title
 		like concat('%',#{searchContent},'%')
 		order by board_no desc
+		limit 	10
+		offset #{start}
 	</select>
 </mapper>

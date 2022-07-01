@@ -1,6 +1,8 @@
 package com.spring.test.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.Time;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +32,7 @@ public class MainController {
 		@RequestMapping("signIn.do")
 		public String signIn(Model model) {
 			logger.info("회원가입 화면");
+			
 			return "member/signIn";
 		}
 		
@@ -37,6 +40,7 @@ public class MainController {
 		@RequestMapping("signInAction.do")
 		public String signInAction(HttpServletRequest req, Model model) {
 			logger.info("회원가입 처리");
+			logger.error("11");
 			
 			service.signInAction(req, model);
 			return "member/signInAction";

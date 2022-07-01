@@ -84,11 +84,9 @@ public class MainServiceImpl implements MainService{
 	public void boardList(HttpServletRequest req, Model model) {
 		System.out.println("서비스 - 게시판 목록 조회");
 		
-		//
 		String pageNum = req.getParameter("pageNum");
 		Paging paging = new Paging(pageNum);
 		int total = dao.boardCnt();
-		System.out.println("total : " + total);
 		
 		paging.setTotalCount(total);
 		
@@ -102,9 +100,6 @@ public class MainServiceImpl implements MainService{
 			map.put("end", end);
 			list=dao.boardList(map);
 		}
-		System.out.println("start : " + start);
-		System.out.println("end : " + end);
-		System.out.println("list : " + list);
 				
 		//list를 jsp로 전달
 		model.addAttribute("list", list);
@@ -195,7 +190,6 @@ public class MainServiceImpl implements MainService{
 		int updateCnt = dao.boardUpdateAction(dto);
 		
 		//jsp로 결과 전달
-		//redirect.addAttribute("pageNum", pageNum);
 		model.addAttribute("updateCnt", updateCnt);
 		model.addAttribute("crtPage", pageNum);
 		model.addAttribute("board_no", board_no);
@@ -229,7 +223,6 @@ public class MainServiceImpl implements MainService{
 		//화면에서 검색어 입력 받아오기
 		String pageNum = req.getParameter("pageNum");
 		String searchContent = req.getParameter("searchContent");
-		System.out.println("searchContent : " + searchContent);
 		
 		Paging paging = new Paging(pageNum);
 		int total = dao.searchCnt(searchContent);

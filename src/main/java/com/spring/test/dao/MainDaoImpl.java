@@ -90,10 +90,10 @@ public class MainDaoImpl implements MainDao{
 		System.out.println("dao - 게시판 수정 화면");
 		
 		MainDao dao = sqlSession.getMapper(MainDao.class);
-		System.out.println("dao :" + dao);
 		return dao.boardUpdate(board_no);
 	}
-
+	
+	//게시판 수정 처리
 	@Override
 	public int boardUpdateAction(BoardDto dto) {
 		System.out.println("dao - 게시판 수정 처리");
@@ -111,23 +111,22 @@ public class MainDaoImpl implements MainDao{
 		return dao.boardDeleteAction(board_no);
 	}
 
-	/*
-	 * //검색글 수
-	 * 
-	 * @Override public int searchCnt(String searchContent) {
-	 * System.out.println("dao - 게시판 검색글 수");
-	 * 
-	 * MainDao dao = sqlSession.getMapper(MainDao.class); return
-	 * dao.searchCnt(searchContent); }
-	 */
+	 //검색글 수
+	@Override 
+	public int searchCnt(String searchContent) {
+		System.out.println("dao - 게시판 검색글 수");
+	
+		MainDao dao = sqlSession.getMapper(MainDao.class); 
+		return dao.searchCnt(searchContent); 
+	}
 	
 	//게시판 검색
 	@Override
-	public List<BoardDto> boardSearch(String searchContent) {
+	public List<BoardDto> boardSearch(Map<String,Object> map) {
 		System.out.println("dao - 게시판 검색");
 		
 		MainDao dao = sqlSession.getMapper(MainDao.class);
-		return dao.boardSearch(searchContent);
+		return dao.boardSearch(map);
 	}
 
 

@@ -39,8 +39,14 @@
 			<c:forEach var="dto" items="${list}">
 				<tr>
 					<th>${num}</th>
-					<%-- <th>${dto.board_no}</th> --%>
-					<th><a href="${path}/boardDetail.do?board_no=${dto.board_no}&crtPage=${paging.currentPage}">${dto.board_title}</a></th>
+					<c:choose>
+						<c:when test="searchContent==null">
+							<th><a href="${path}/boardDetail.do?board_no=${dto.board_no}&crtPage=${paging.currentPage}">${dto.board_title}</a></th>
+						</c:when>
+						<c:otherwise>
+							<th><a href="${path}/boardDetail.do?board_no=${dto.board_no}&crtPage=${paging.currentPage}&searchContent=${searchContent}">${dto.board_title}</a></th>
+						</c:otherwise>
+					</c:choose>
 					<th>${dto.board_writer}</th>
 					<th>${dto.read_cnt}</th>
 					<th>${dto.in_date}</th>
@@ -52,22 +58,44 @@
 	           	<td colspan="5" align="center">
 		          	<!-- 이전버튼 활성화 여부 -->
 		          	<c:if test="${paging.startPage>10}">
-		          		<a href="${path}/boardList.do?pageNum=${paging.prev}">[이전]</a>
+			          	<c:choose>
+							<c:when test="searchContent==null">
+		          				<a href="${path}/boardList.do?pageNum=${paging.prev}">[이전]</a>
+		          			</c:when>
+		          			<c:otherwise>
+		          				<a href="${path}/boardSearch.do?pageNum=${paging.prev}">[이전]</a>
+		          			</c:otherwise>
+		          		</c:choose>
 		          	</c:if>
 		          	
 		          	<!-- 페이지 번호 처리 -->
 		          	<c:forEach var="pgnum" begin="${paging.startPage}" end="${paging.endPage}">
-		          		<a href="${path}/boardList.do?pageNum=${pgnum}">${pgnum}</a>
+		          		<c:choose>
+							<c:when test="searchContent==null">
+		          				<a href="${path}/boardList.do?pageNum=${pgnum}">${pgnum}</a>
+		          			</c:when>
+		          			<c:otherwise>
+		          				<a href="${path}/boardSearch.do?pageNum=${pgnum}&searchContent=${searchContent}">${pgnum}</a>
+		          			</c:otherwise>
+		          		</c:choose>
 		          	</c:forEach>
 		          	
 		          	<!-- 다음 버튼 활성화 여부 -->
 		          	<c:if test="${paging.endPage<paging.pageCount}">
-		          		<a href="${path}/boardList.do?pageNum=${paging.next}">[다음]</a>
+		          		<c:choose>
+							<c:when test="searchContent==null">
+		          				<a href="${path}/boardList.do?pageNum=${paging.next}">[다음]</a>
+		          			</c:when>
+		          			<c:otherwise>
+		          				<a href="${path}/boardSearch.do?pageNum=${paging.next}">[다음]</a>
+		          			</c:otherwise>
+		          		</c:choose>
 		          	</c:if>
 	          	</td>
             </tr>
 			<tr>
 				<td colspan="5" align="right">
+					<input type="hidden" name="searchContent" value="${searchContent}">
 					<input type="hidden" name="crtPage" value="${paging.currentPage}">
 					<input type="button" id="insert" value="글쓰기">
 				</td>

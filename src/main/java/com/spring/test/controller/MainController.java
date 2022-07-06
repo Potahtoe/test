@@ -1,6 +1,8 @@
 package com.spring.test.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.Time;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.test.dto.BoardDto;
 import com.spring.test.service.MainService;
 
 @Controller
@@ -27,6 +32,7 @@ public class MainController {
 		@RequestMapping("signIn.do")
 		public String signIn(Model model) {
 			logger.info("회원가입 화면");
+			
 			return "member/signIn";
 		}
 		
@@ -34,6 +40,7 @@ public class MainController {
 		@RequestMapping("signInAction.do")
 		public String signInAction(HttpServletRequest req, Model model) {
 			logger.info("회원가입 처리");
+			logger.error("11");
 			
 			service.signInAction(req, model);
 			return "member/signInAction";
@@ -111,30 +118,40 @@ public class MainController {
 		}
 		//게시판 수정 처리
 		@RequestMapping("boardUpdateAction.do")
-		public String boardUpdateAction(HttpServletRequest req, HttpServletResponse res, Model model) throws IOException {
+		public String boardUpdateAction(@RequestParam("pageNum") String pageNum, @RequestParam("searchContent") String searchContent, HttpServletRequest req, Model model, RedirectAttributes redirect) {
 			logger.info("게시판 수정 처리");
 			
 			int board_no = Integer.parseInt(req.getParameter("board_no"));
-			String pageNum = req.getParameter("pageNum");
-			logger.info("board_no : " + board_no);
-			logger.info("pageNum : " + pageNum);
 			
 			service.boardUpdateAction(req, model);
+			req.setAttribute("board_no", board_no); 
 			
-			req.setAttribute("board_no", board_no);
-			req.setAttribute("pageNum", pageNum);
+			model.asMap().clear();
+			redirect.addAttribute("pageNum", pageNum);
+			redirect.addAttribute("searchContent", searchContent);
 			
-			return "redirect:boardList.do";
+			if(searchContent=="") {
+				return "redirect:boardList.do";
+			}else {
+				return "redirect:boardSearch.do";
+			}
 		}
-		
+
 		//게시판 삭제 처리
 		@RequestMapping("boardDeleteAction.do")
-		public void boardDeleteAction(HttpServletRequest req, HttpServletResponse res, Model model) throws IOException {
+		public String boardDeleteAction(@RequestParam("crtPage") String pageNum, @RequestParam("searchContent") String searchContent, HttpServletRequest req, Model model, RedirectAttributes redirect) {
 			logger.info("게시판 삭제 처리");
 			
 			service.boardDeleteAction(req, model);
-			String viewPage = req.getContextPath() +"/boardList.do";
-			res.sendRedirect(viewPage);
+			model.asMap().clear();
+			redirect.addAttribute("pageNum", pageNum);
+			redirect.addAttribute("searchContent", searchContent);
+			
+			if(searchContent=="") {
+				return "redirect:boardList.do";
+			}else {
+				return "redirect:boardSearch.do";
+			}
 		}
 		
 		//게시판 검색
@@ -143,6 +160,6 @@ public class MainController {
 			logger.info("게시판 검색");
 			
 			service.boardSearch(req, model);
-			return "board/boardSearch";
+			return "board/boardList";
 		}
 }

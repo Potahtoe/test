@@ -9,16 +9,23 @@
 <script>
 	$(function(){
 		$("#delete").click(function(){
-			document.form.action="${path}/boardDeleteAction.do?board_no=${dto.board_no}&pageNum=${crtPage}";
+			document.form.action="${path}/boardDeleteAction.do";
 			document.form.submit();
 		});
 		$("#update").click(function(){
-			document.form.action="${path}/boardUpdate.do?board_no=${dto.board_no}&crtPage=${crtPage}";
+			document.form.action="${path}/boardUpdate.do?board_no=${dto.board_no}&pageNum=${crtPage}&searchContent=${searchContent}";
 			document.form.submit();
 		});
+		
 		$("#list").click(function(){
-			location.href="${path}/boardList.do?board_no=${dto.board_no}&pageNum=${crtPage}"
-		});	
+			var searchContent =$('input[name=searchContent]').val();
+			
+			if(searchContent==""){
+					location.href="${path}/boardList.do?board_no=${dto.board_no}&pageNum=${crtPage}&searchContent=${searchContent}";
+			}else{
+					location.href="${path}/boardSearch.do?board_no=${dto.board_no}&pageNum=${crtPage}&searchContent=${searchContent}";
+			}
+		});
 	});
 
 </script>
@@ -49,6 +56,7 @@
 			</tr>
 			<tr colspan="2" align="center">
 				<td>
+				<input type="hidden" name="searchContent" value="${searchContent}"> 
 				<input type="hidden" name="crtPage" value="${crtPage}"> 
 				<input type="hidden" name="board_no" value="${dto.board_no}"> 
 				<input type="button" id="delete" value="삭제">

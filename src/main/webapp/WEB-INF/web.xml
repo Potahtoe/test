@@ -7,7 +7,6 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml
-					/WEB-INF/spring/security-context.xml
 					classpath:/mybatis-config.xml <!-- 추가해야 작동 -->
 		</param-value>
 	</context-param>

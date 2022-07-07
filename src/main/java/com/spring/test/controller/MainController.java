@@ -1,9 +1,6 @@
 package com.spring.test.controller;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.sql.Time;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.spring.test.dto.BoardDto;
 import com.spring.test.service.MainService;
 
 @Controller
@@ -30,7 +26,7 @@ public class MainController {
 		//------------회원가입------------------
 		//회원가입 화면
 		@RequestMapping("signIn.do")
-		public String signIn(Model model) {
+		public String signIn() {
 			logger.info("회원가입 화면");
 			
 			return "member/signIn";
@@ -62,7 +58,7 @@ public class MainController {
 		//------------로그인------------------
 		//로그인 화면
 		@RequestMapping("login.do")
-		public String login(Model model) {
+		public String login() {
 			logger.info("로그인 화면");
 			return "member/login";
 		}
@@ -87,7 +83,7 @@ public class MainController {
 		}
 		//게시판 등록 화면
 		@RequestMapping("boardInsert.do")
-		public String boardInsert(Model model) {
+		public String boardInsert() {
 			logger.info("게시판 등록 화면");
 			return "board/boardInsert";
 		}
